@@ -11,6 +11,7 @@ import java.util.Locale;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.mysql.cj.api.jdbc.Statement;
 
@@ -19,6 +20,7 @@ import by.htp.spring_tags.domain.Address;
 import by.htp.spring_tags.domain.Skill;
 import by.htp.spring_tags.domain.User;
 
+@Repository
 public class UserDaoImpl implements UserDao {
 	private static String REQ_GET_USER_BY_ID = "SELECT user.*, skill.*, address.* FROM user "
 			+ "LEFT JOIN user_skill ON user.id=user_skill.user " 
@@ -28,7 +30,7 @@ public class UserDaoImpl implements UserDao {
 	private static final String REQ_ADD_USER_TO_JOIN_TABLE = "INSERT INTO user_skill VALUES (?,?);";
 
 	@Autowired
-	DataSource dataSource;
+	private DataSource dataSource;
 
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
@@ -37,41 +39,41 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public int addUser(User user) {
 		Connection connection = null;
-		PreparedStatement prepStatementUser = null;
-		PreparedStatement prepStatementSkill = null;
+		PreparedStatement statementUser = null;
+		PreparedStatement statementSkill = null;
 		ResultSet resultSet = null;
 
 		try {
 			connection = dataSource.getConnection();
-			prepStatementUser = connection.prepareStatement(REQ_ADD_USER, Statement.RETURN_GENERATED_KEYS);
-			prepStatementUser.setString(1, user.getLogin());
-			prepStatementUser.setString(2, user.getPassword());
-			prepStatementUser.setInt(3, user.getAddress().getId());
-			prepStatementUser.setString(4, user.getLocale().getLanguage());
-			prepStatementUser.execute();
-			resultSet = prepStatementUser.getGeneratedKeys();
+			statementUser = connection.prepareStatement(REQ_ADD_USER, Statement.RETURN_GENERATED_KEYS);
+			statementUser.setString(1, user.getLogin());
+			statementUser.setString(2, user.getPassword());
+			statementUser.setInt(3, user.getAddress().getId());
+			statementUser.setString(4, user.getLocale().getLanguage());
+			statementUser.execute();
+			resultSet = statementUser.getGeneratedKeys();
 
-			int generatedId;
+			int userId;
 			
 			if (resultSet.next()) {
-				generatedId = resultSet.getInt(1);
+				userId = resultSet.getInt(1);
 			} else {
 				throw new DaoException("Error adding user to DB");
 			}
 					
-			prepStatementSkill = connection.prepareStatement(REQ_ADD_USER_TO_JOIN_TABLE);
+			statementSkill = connection.prepareStatement(REQ_ADD_USER_TO_JOIN_TABLE);
 			connection.setAutoCommit(false);
 			
 			for(Skill skill : user.getSkills()) {
-				prepStatementSkill.setInt(1, generatedId);
-				prepStatementSkill.setInt(2, skill.getId());
-				prepStatementSkill.addBatch();
+				statementSkill.setInt(1, userId);
+				statementSkill.setInt(2, skill.getId());
+				statementSkill.addBatch();
 			}
 			
-			prepStatementSkill.executeBatch();
+			statementSkill.executeBatch();
 			connection.commit();
 			
-			return generatedId;
+			return userId;
 		} catch (SQLException e) {
 			throw new DaoException("Error adding user to DB", e);
 		} finally {
@@ -80,11 +82,11 @@ public class UserDaoImpl implements UserDao {
 				if (resultSet != null) {
 					resultSet.close();
 				}
-				if (prepStatementUser != null) {
-					prepStatementUser.close();
+				if (statementUser != null) {
+					statementUser.close();
 				}
-				if (prepStatementSkill != null) {
-					prepStatementSkill.close();
+				if (statementSkill != null) {
+					statementSkill.close();
 				}
 				if (connection != null) {
 					connection.close();

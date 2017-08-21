@@ -3,6 +3,8 @@ package by.htp.spring_tags.dao.skill;
 import static org.junit.Assert.*;
 
 import java.beans.PropertyVetoException;
+import java.util.Arrays;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -36,5 +38,25 @@ public class SkillDaoImplTest {
 		Skill skill = skillDao.getSkillById(skillId);
 
 		assertEquals(expectedSkillName, skill.getSkillName());
+	}
+	
+	@Test
+	public void getAllSkillsTest() {
+		int skillIdFirst = 1;
+		String expectedSkillNameFirst = "Java";
+		Skill skillFirst = new Skill();
+		skillFirst.setId(skillIdFirst);
+		skillFirst.setSkillName(expectedSkillNameFirst);
+		int skillIdSecond = 2;
+		String expectedSkillNameSecond = "Python";
+		Skill skillSecond = new Skill();
+		skillSecond.setId(skillIdSecond);
+		skillSecond.setSkillName(expectedSkillNameSecond);
+		
+		List<Skill> expectedSkills = Arrays.asList(skillFirst, skillSecond);
+		List<Skill> gotSkills = skillDao.getAllSkills();
+		
+		assertTrue(gotSkills.containsAll(expectedSkills));
+		
 	}
 }

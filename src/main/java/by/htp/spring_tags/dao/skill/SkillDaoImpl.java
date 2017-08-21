@@ -2,22 +2,23 @@ package by.htp.spring_tags.dao.skill;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import by.htp.spring_tags.dao.exception.DaoException;
 import by.htp.spring_tags.domain.Skill;
 
+@Repository
 public class SkillDaoImpl implements SkillDao {
 	private static String REQ_GET_SKILL_BY_ID = "SELECT * FROM skill WHERE id=?;";
 	private static String REQ_GET_ALL_SKILLS = "SELECT * FROM skill;";
 
 	@Autowired
-	DataSource dataSource;
+	private DataSource dataSource;
 
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
@@ -81,7 +82,7 @@ public class SkillDaoImpl implements SkillDao {
 		Connection connection = null;
 		PreparedStatement prepStatement = null;
 		ResultSet resultSet = null;
-		
+
 		List<Skill> skills;
 
 		try {
@@ -89,16 +90,17 @@ public class SkillDaoImpl implements SkillDao {
 			prepStatement = connection.prepareStatement(REQ_GET_ALL_SKILLS);
 			resultSet = prepStatement.executeQuery();
 			skills = new ArrayList<>();
-			
+
 			while (resultSet.next()) {
 				Skill skill = new Skill();
 				skill.setId(resultSet.getInt("id"));
 				skill.setSkillName(resultSet.getString("skillName"));
+				skills.add(skill);
 			}
-				return skills;
-			
+			return skills;
+
 		} catch (SQLException e) {
-			
+
 			throw new DaoException("Error skills list getting", e);
 		} finally {
 
@@ -113,7 +115,7 @@ public class SkillDaoImpl implements SkillDao {
 					connection.close();
 				}
 			} catch (SQLException e) {
-				
+
 				throw new DaoException("Error resources closing", e);
 			}
 		}

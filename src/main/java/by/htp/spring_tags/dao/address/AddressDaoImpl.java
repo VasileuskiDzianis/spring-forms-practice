@@ -8,17 +8,19 @@ import java.sql.SQLException;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.mysql.cj.api.jdbc.Statement;
 
 import by.htp.spring_tags.dao.exception.DaoException;
 import by.htp.spring_tags.domain.Address;
 
+@Repository
 public class AddressDaoImpl implements AddressDao {
 	private static String REQ_ADD_ADDRESS = "INSERT INTO address (country, city) VALUES (?, ?);";
 
 	@Autowired
-	DataSource dataSource;
+	private DataSource dataSource;
 
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
