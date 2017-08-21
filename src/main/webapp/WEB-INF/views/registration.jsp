@@ -12,7 +12,7 @@
 	<form:form action="confirm" modelAttribute="user"
 		cssClass="form-container">
 		<div class="form-title">
-			<h2>User registration</h2>
+			<h2>User registration.</h2>
 		</div>
 		<div class="form-title">Login:</div>
 		<form:input path="login" cssClass="form-field" />
