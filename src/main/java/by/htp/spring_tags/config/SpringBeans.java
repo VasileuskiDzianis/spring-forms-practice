@@ -22,7 +22,7 @@ public class SpringBeans {
 		 
 		try {
 		
-			input = this.getClass().getResourceAsStream(PROP_FILE);
+			input = getClass().getResourceAsStream(PROP_FILE);
 			countries.load(input);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

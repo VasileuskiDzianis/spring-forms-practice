@@ -1,6 +1,5 @@
 package by.htp.spring_tags.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -33,10 +32,8 @@ public class RegistrationController {
 		user.setAddress(address);
 		user.setSkills(skills);
 		
-		List<String> skillsIds = new ArrayList<>();
-		
+		model.addAttribute("countries", countries);
 		model.addAttribute("user", user);
-		model.addAttribute("skillsIds", skillsIds);
 		
 		return "registration";
 	}

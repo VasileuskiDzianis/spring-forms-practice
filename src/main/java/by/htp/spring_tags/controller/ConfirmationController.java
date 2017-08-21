@@ -5,6 +5,7 @@ import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,23 +19,22 @@ public class ConfirmationController {
 
 	@Autowired
 	UserService userService;
-	
-	@RequestMapping(value = "/confirm", method = RequestMethod.POST)
-	public String confirm(@ModelAttribute("user") User user, Locale locale) {
 
+	@RequestMapping(value = "/confirm", method = RequestMethod.POST)
+	public String confirm(@ModelAttribute("user") User user, Locale locale, Model model) {
 		List<Skill> skills = user.getSkills();
 
 		for (int i = 0; i < skills.size(); i++) {
-
 			if (skills.get(i).getId() == 0) {
 				skills.remove(i);
 			}
 		}
-		
 		user.setLocale(locale);
 		userService.addUserAndSetId(user);
+		User storedUser = userService.getUserById(user.getId());
 
-		return "redirect:register";
+		model.addAttribute("storedUser", storedUser);
+
+		return "confirmation";
 	}
-
 }
