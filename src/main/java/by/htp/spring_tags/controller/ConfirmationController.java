@@ -30,8 +30,8 @@ public class ConfirmationController {
 			}
 		}
 		user.setLocale(locale);
-		userService.addUserAndSetId(user);
-		User storedUser = userService.getUserById(user.getId());
+		userService.saveUserAndSetId(user);
+		User storedUser = userService.findUserById(user.getId());
 
 		model.addAttribute("storedUser", storedUser);
 

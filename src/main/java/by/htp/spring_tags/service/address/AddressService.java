@@ -4,5 +4,5 @@ import by.htp.spring_tags.domain.Address;
 
 public interface AddressService {
 	
-	void addAddressAndSetId(Address address);
+	void saveAddressAndSetId(Address address);
 }

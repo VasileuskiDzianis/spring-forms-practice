@@ -14,9 +14,9 @@ public class SkillServiceImpl implements SkillService {
 	private SkillDao skillDao;
 	
 	@Override
-	public List<Skill> getAllSkills() {
+	public List<Skill> findAllSkills() {
 		
-		return skillDao.getAllSkills();
+		return skillDao.findAllSkills();
 	}
 
 }

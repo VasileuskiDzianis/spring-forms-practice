@@ -25,13 +25,13 @@ public class SkillDaoImpl implements SkillDao {
 	}
 
 	@Override
-	public void addSkill(Skill skill) {
+	public void saveSkill(Skill skill) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public Skill getSkillById(int id) {
+	public Skill findSkillById(int id) {
 		Connection connection = null;
 		PreparedStatement prepStatement = null;
 		ResultSet resultSet = null;
@@ -78,7 +78,7 @@ public class SkillDaoImpl implements SkillDao {
 	}
 
 	@Override
-	public List<Skill> getAllSkills() {
+	public List<Skill> findAllSkills() {
 		Connection connection = null;
 		PreparedStatement prepStatement = null;
 		ResultSet resultSet = null;

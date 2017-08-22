@@ -6,5 +6,5 @@ import by.htp.spring_tags.domain.Skill;
 
 public interface SkillService {
 
-	List<Skill> getAllSkills();
+	List<Skill> findAllSkills();
 }

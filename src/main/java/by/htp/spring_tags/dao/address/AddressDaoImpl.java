@@ -27,7 +27,7 @@ public class AddressDaoImpl implements AddressDao {
 	}
 
 	@Override
-	public int addAddress(Address address) throws DaoException {
+	public int saveAddress(Address address) throws DaoException {
 		Connection connection = null;
 		PreparedStatement prepStatement = null;
 		ResultSet resultSet = null;

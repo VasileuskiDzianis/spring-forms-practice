@@ -36,7 +36,7 @@ public class AddressDaoImplTest extends AddressDaoImpl {
 		address.setCountry("United Kingdom");
 		address.setCity("London");
 		
-		int returnedId = addressDao.addAddress(address);
+		int returnedId = addressDao.saveAddress(address);
 		
 		assertFalse(returnedId == 0);
 	}

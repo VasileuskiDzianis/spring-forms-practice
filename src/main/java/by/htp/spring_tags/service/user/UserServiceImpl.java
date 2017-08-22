@@ -15,7 +15,7 @@ public class UserServiceImpl implements UserService {
 	private AddressService addressService;
 
 	@Override
-	public void addUserAndSetId(User user) {
+	public void saveUserAndSetId(User user) {
 		if (user == null || user.getAddress() == null || user.getSkills() == null || user.getLocale() == null
 				|| user.getLogin() == null || user.getPassword() == null) {
 
@@ -23,16 +23,16 @@ public class UserServiceImpl implements UserService {
 		}
 
 		
-		addressService.addAddressAndSetId(user.getAddress());
+		addressService.saveAddressAndSetId(user.getAddress());
 
-		int userId = userDao.addUser(user);
+		int userId = userDao.saveUser(user);
 		user.setId(userId);
 	}
 
 	@Override
-	public User getUserById(int id) {
+	public User findUserById(int id) {
 
-		return userDao.getUserById(id);
+		return userDao.findUserById(id);
 	}
 
 }

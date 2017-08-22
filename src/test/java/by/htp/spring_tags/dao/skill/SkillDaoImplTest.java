@@ -35,7 +35,7 @@ public class SkillDaoImplTest {
 		int skillId = 2;
 		String expectedSkillName = "Python";
 
-		Skill skill = skillDao.getSkillById(skillId);
+		Skill skill = skillDao.findSkillById(skillId);
 
 		assertEquals(expectedSkillName, skill.getSkillName());
 	}
@@ -54,7 +54,7 @@ public class SkillDaoImplTest {
 		skillSecond.setSkillName(expectedSkillNameSecond);
 		
 		List<Skill> expectedSkills = Arrays.asList(skillFirst, skillSecond);
-		List<Skill> gotSkills = skillDao.getAllSkills();
+		List<Skill> gotSkills = skillDao.findAllSkills();
 		
 		assertTrue(gotSkills.containsAll(expectedSkills));
 		

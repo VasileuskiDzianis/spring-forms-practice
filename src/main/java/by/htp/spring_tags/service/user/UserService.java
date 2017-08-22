@@ -4,7 +4,7 @@ import by.htp.spring_tags.domain.User;
 
 public interface UserService {
 	
-	void addUserAndSetId(User user);
+	void saveUserAndSetId(User user);
 	
-	User getUserById(int id);
+	User findUserById(int id);
 }

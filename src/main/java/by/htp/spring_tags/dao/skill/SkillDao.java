@@ -7,11 +7,11 @@ import by.htp.spring_tags.domain.Skill;
 
 public interface SkillDao {
 
-	void addSkill(Skill skill);
+	void saveSkill(Skill skill);
 
-	Skill getSkillById(int id) throws DaoException;
+	Skill findSkillById(int id) throws DaoException;
 
 	void deleteSkill(Skill id);
 
-	List<Skill> getAllSkills();
+	List<Skill> findAllSkills();
 }

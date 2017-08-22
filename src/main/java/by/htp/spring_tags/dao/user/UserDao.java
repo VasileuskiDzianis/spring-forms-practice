@@ -4,9 +4,9 @@ import by.htp.spring_tags.domain.User;
 
 public interface UserDao {
 	
-	int addUser(User user);
+	int saveUser(User user);
 
-	User getUserById(int id);
+	User findUserById(int id);
 
 	void deleteUser(User user);
 }

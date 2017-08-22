@@ -12,14 +12,14 @@ public class AddressServiceImpl implements AddressService {
 	private AddressDao addressDao;
 
 	@Override
-	public void addAddressAndSetId(Address address) {
+	public void saveAddressAndSetId(Address address) {
 
 		if (address == null || address.getCountry() == null || address.getCity() == null) {
 
 			throw new IllegalArgumentException();
 		}
 
-		int addressId = addressDao.addAddress(address);
+		int addressId = addressDao.saveAddress(address);
 		address.setId(addressId);
 	}
 }

@@ -47,7 +47,7 @@ public class UserDaoImplTest extends UserDaoImpl {
 		testUserExpectedSkill.setId(2);
 		testUserExpectedSkill.setSkillName("Python");
 		
-		User user = userDao.getUserById(testUserId);
+		User user = userDao.findUserById(testUserId);
 		
 		assertEquals(testUserExpectedLogin, user.getLogin());
 		assertEquals(testUserExpectedPassword, user.getPassword());
@@ -80,9 +80,9 @@ public class UserDaoImplTest extends UserDaoImpl {
 		address.setCity("London");
 		givenUser.setAddress(address);
 		
-		int storedUserId = userDao.addUser(givenUser);
+		int storedUserId = userDao.saveUser(givenUser);
 		
-		User gotUser = userDao.getUserById(storedUserId);
+		User gotUser = userDao.findUserById(storedUserId);
 		
 		assertEquals(givenUser.getLogin(), gotUser.getLogin());
 		assertEquals(givenUser.getPassword(), gotUser.getPassword());

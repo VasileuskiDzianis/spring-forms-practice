@@ -37,7 +37,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public int addUser(User user) {
+	public int saveUser(User user) {
 		Connection connection = null;
 		PreparedStatement statementUser = null;
 		PreparedStatement statementSkill = null;
@@ -98,7 +98,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public User getUserById(int id) {
+	public User findUserById(int id) {
 		Connection connection = null;
 		PreparedStatement prepStatement = null;
 		ResultSet resultSet = null;

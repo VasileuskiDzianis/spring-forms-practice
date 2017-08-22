@@ -28,7 +28,7 @@ public class RegistrationController {
 	public String home(Locale locale, Model model) {
 		User user = new User();
 		Address address = new Address();
-		List<Skill> skills = skillService.getAllSkills();
+		List<Skill> skills = skillService.findAllSkills();
 		user.setAddress(address);
 		user.setSkills(skills);
 		

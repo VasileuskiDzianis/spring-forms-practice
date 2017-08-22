@@ -5,5 +5,5 @@ import by.htp.spring_tags.domain.Address;
 
 public interface AddressDao {
 	
-	int addAddress(Address address) throws DaoException;
+	int saveAddress(Address address) throws DaoException;
 }
