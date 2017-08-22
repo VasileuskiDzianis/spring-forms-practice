@@ -16,7 +16,7 @@ public class AddressServiceImpl implements AddressService {
 
 		if (address == null || address.getCountry() == null || address.getCity() == null) {
 
-			throw new NullPointerException();
+			throw new IllegalArgumentException();
 		}
 
 		int addressId = addressDao.addAddress(address);

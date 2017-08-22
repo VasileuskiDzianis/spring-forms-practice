@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
 		if (user == null || user.getAddress() == null || user.getSkills() == null || user.getLocale() == null
 				|| user.getLogin() == null || user.getPassword() == null) {
 
-			throw new NullPointerException();
+			throw new IllegalArgumentException();
 		}
 
 		
