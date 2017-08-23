@@ -3,11 +3,25 @@ package by.htp.spring_tags.domain;
 import java.util.List;
 import java.util.Locale;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class User {
 	private int id;
+	
+	@NotNull(message="can not be empty")
+	@Size(min=8, message="8 chars minimum")
 	private String login;
+	
+	@NotNull(message="can not be empty")
+	@Size(min=8, message="8 chars minimum")
 	private String password;
+	
+	@NotNull(message="can not be empty")
+	@Valid
 	private Address address;
+	
 	private int age;
 	private Locale locale;
 	private List<Skill> skills;

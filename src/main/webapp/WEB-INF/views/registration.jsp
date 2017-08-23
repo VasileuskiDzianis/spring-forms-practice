@@ -14,17 +14,36 @@
 		<div class="form-title">
 			<h2>User registration.</h2>
 		</div>
-		<div class="form-title">Login:</div>
+
+		<div class="form-title">
+			Login:
+			<form:errors path="login" cssClass="error" />
+		</div>
 		<form:input path="login" cssClass="form-field" />
-		<div class="form-title">Password:</div>
+
+
+		<div class="form-title">
+			Password:
+			<form:errors path="password" cssClass="error" />
+		</div>
 		<form:password path="password" cssClass="form-field" />
+
 		<div class="form-title">Age:</div>
-		<form:password path="age" cssClass="form-field" />
-		<div class="form-title">Country:</div>
+		<form:input path="age" cssClass="form-field" />
+
+		<div class="form-title">
+			Country:
+			<form:errors path="address.country" cssClass="error" />
+		</div>
 		<form:select items="${countries}" path="address.country"
 			cssClass="form-field" />
-		<div class="form-title">City:</div>
+
+		<div class="form-title">
+			City:
+			<form:errors path="address.city" cssClass="error" />
+		</div>
 		<form:input path="address.city" cssClass="form-field" />
+
 		<div class="form-title">Skills:</div>
 		<c:forEach var="skill" items="${user.skills}" varStatus="status">
 			<input id="skill[${status.index}]" type="checkbox"

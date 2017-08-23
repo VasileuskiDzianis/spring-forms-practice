@@ -159,3 +159,7 @@ body {
 	background-image: -ms-linear-gradient(top, #6aa436 0%, #8dc059 100%);
 	color: #fff;
 }
+
+.error {
+	color: #ff0000;
+}
