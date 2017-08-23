@@ -1,6 +1,6 @@
 package by.htp.spring_tags.dao.address;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
 
 import java.beans.PropertyVetoException;
 
@@ -9,7 +9,6 @@ import org.junit.Test;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
-import by.htp.spring_tags.dao.exception.DaoException;
 import by.htp.spring_tags.domain.Address;
 
 public class AddressDaoImplTest extends AddressDaoImpl {
@@ -30,14 +29,14 @@ public class AddressDaoImplTest extends AddressDaoImpl {
 	}
 
 	@Test
-	public void addAddressTest() throws DaoException {
+	public void addAddressTest() {
 		Address address = new Address();
-		
+
 		address.setCountry("United Kingdom");
 		address.setCity("London");
-		
+
 		int returnedId = addressDao.saveAddress(address);
-		
+
 		assertFalse(returnedId == 0);
 	}
 

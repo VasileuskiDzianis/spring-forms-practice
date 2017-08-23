@@ -1,6 +1,9 @@
 package by.htp.spring_tags.dao.skill;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,14 +12,13 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import by.htp.spring_tags.dao.exception.DaoException;
 import by.htp.spring_tags.domain.Skill;
 
 @Repository
 public class SkillDaoImpl implements SkillDao {
-	private static String REQ_GET_SKILL_BY_ID = "SELECT * FROM skill WHERE id=?;";
+	private static String REQ_GET_SKILL_BY_ID = "SELECT * FROM skill WHERE skillId=?;";
 	private static String REQ_GET_ALL_SKILLS = "SELECT * FROM skill;";
-
+	
 	@Autowired
 	private DataSource dataSource;
 
@@ -44,13 +46,13 @@ public class SkillDaoImpl implements SkillDao {
 
 			if (resultSet.next()) {
 				Skill skill = new Skill();
-				skill.setId(resultSet.getInt("id"));
-				skill.setSkillName(resultSet.getString("skillName"));
+				skill.setId(resultSet.getInt(COLUMN_SKILL_ID));
+				skill.setSkillName(resultSet.getString(COLUMN_SKILL_NAME));
 
 				return skill;
 			}
 		} catch (SQLException e) {
-			throw new DaoException("Error getting skill by id", e);
+			throw new RuntimeException("Error getting skill by id", e);
 		} finally {
 
 			try {
@@ -64,7 +66,7 @@ public class SkillDaoImpl implements SkillDao {
 					connection.close();
 				}
 			} catch (SQLException e) {
-				throw new DaoException("Error resources closing", e);
+				throw new RuntimeException("Error resources closing", e);
 			}
 		}
 
@@ -93,15 +95,15 @@ public class SkillDaoImpl implements SkillDao {
 
 			while (resultSet.next()) {
 				Skill skill = new Skill();
-				skill.setId(resultSet.getInt("id"));
-				skill.setSkillName(resultSet.getString("skillName"));
+				skill.setId(resultSet.getInt(COLUMN_SKILL_ID));
+				skill.setSkillName(resultSet.getString(COLUMN_SKILL_NAME));
 				skills.add(skill);
 			}
 			return skills;
 
 		} catch (SQLException e) {
 
-			throw new DaoException("Error skills list getting", e);
+			throw new RuntimeException("Error skills list getting", e);
 		} finally {
 
 			try {
@@ -116,7 +118,7 @@ public class SkillDaoImpl implements SkillDao {
 				}
 			} catch (SQLException e) {
 
-				throw new DaoException("Error resources closing", e);
+				throw new RuntimeException("Error resources closing", e);
 			}
 		}
 	}

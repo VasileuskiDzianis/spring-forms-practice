@@ -10,7 +10,6 @@ import org.junit.Before;
 import org.junit.Test;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
-import by.htp.spring_tags.dao.exception.DaoException;
 import by.htp.spring_tags.domain.Skill;
 
 public class SkillDaoImplTest {
@@ -31,7 +30,7 @@ public class SkillDaoImplTest {
 	}
 
 	@Test
-	public void testGetSkillById() throws DaoException {
+	public void testGetSkillById() throws RuntimeException {
 		int skillId = 2;
 		String expectedSkillName = "Python";
 

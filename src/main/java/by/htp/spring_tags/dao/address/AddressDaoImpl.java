@@ -1,9 +1,6 @@
 package by.htp.spring_tags.dao.address;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 import javax.sql.DataSource;
 
@@ -12,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import com.mysql.cj.api.jdbc.Statement;
 
-import by.htp.spring_tags.dao.exception.DaoException;
 import by.htp.spring_tags.domain.Address;
 
 @Repository
@@ -27,7 +23,7 @@ public class AddressDaoImpl implements AddressDao {
 	}
 
 	@Override
-	public int saveAddress(Address address) throws DaoException {
+	public int saveAddress(Address address) throws RuntimeException {
 		Connection connection = null;
 		PreparedStatement prepStatement = null;
 		ResultSet resultSet = null;
@@ -45,7 +41,7 @@ public class AddressDaoImpl implements AddressDao {
 				return resultSet.getInt(1);
 			}
 		} catch (SQLException e) {
-			throw new DaoException("Error getting skill by id", e);
+			throw new RuntimeException("Error getting skill by id", e);
 		} finally {
 
 			try {
@@ -59,7 +55,7 @@ public class AddressDaoImpl implements AddressDao {
 					connection.close();
 				}
 			} catch (SQLException e) {
-				throw new DaoException("Error resources closing", e);
+				throw new RuntimeException("Error resources closing", e);
 			}
 		}
 

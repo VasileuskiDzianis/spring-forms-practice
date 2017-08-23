@@ -1,6 +1,7 @@
 package by.htp.spring_tags.dao.user;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.beans.PropertyVetoException;
 import java.util.ArrayList;
@@ -13,7 +14,6 @@ import org.junit.Test;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
-import by.htp.spring_tags.dao.exception.DaoException;
 import by.htp.spring_tags.domain.Address;
 import by.htp.spring_tags.domain.Skill;
 import by.htp.spring_tags.domain.User;
@@ -36,7 +36,7 @@ public class UserDaoImplTest extends UserDaoImpl {
 	}
 
 	@Test
-	public void getUserById() throws DaoException {
+	public void getUserById() {
 		int testUserId = 1;
 		String testUserExpectedLogin = "Shield";
 		String testUserExpectedPassword = "qwerty";
@@ -58,7 +58,7 @@ public class UserDaoImplTest extends UserDaoImpl {
 		
 	}
 	@Test
-	public void addUserTest() throws DaoException {
+	public void addUserTest() {
 		User givenUser = new User();
 		givenUser.setLogin("Fowler");
 		givenUser.setPassword("asdasd");
