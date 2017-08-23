@@ -8,6 +8,7 @@ public class User {
 	private String login;
 	private String password;
 	private Address address;
+	private int age;
 	private Locale locale;
 	private List<Skill> skills;
 
@@ -43,6 +44,14 @@ public class User {
 		this.address = address;
 	}
 
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
 	public Locale getLocale() {
 		return locale;
 	}
@@ -64,6 +73,7 @@ public class User {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
+		result = prime * result + age;
 		result = prime * result + id;
 		result = prime * result + ((locale == null) ? 0 : locale.hashCode());
 		result = prime * result + ((login == null) ? 0 : login.hashCode());
@@ -85,6 +95,8 @@ public class User {
 			if (other.address != null)
 				return false;
 		} else if (!address.equals(other.address))
+			return false;
+		if (age != other.age)
 			return false;
 		if (id != other.id)
 			return false;
@@ -113,6 +125,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", login=" + login + ", password=" + password + ", locale=" + locale + "]";
+		return "User [id=" + id + ", login=" + login + ", password=" + password + ", address=" + address + ", age="
+				+ age + ", locale=" + locale + ", skills=" + skills + "]";
 	}
 }

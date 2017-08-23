@@ -16,13 +16,13 @@
 		</div>
 		<div class="form-title">Login:</div>
 		<form:input path="login" cssClass="form-field" />
-
 		<div class="form-title">Password:</div>
 		<form:password path="password" cssClass="form-field" />
+		<div class="form-title">Age:</div>
+		<form:password path="age" cssClass="form-field" />
 		<div class="form-title">Country:</div>
 		<form:select items="${countries}" path="address.country"
 			cssClass="form-field" />
-
 		<div class="form-title">City:</div>
 		<form:input path="address.city" cssClass="form-field" />
 		<div class="form-title">Skills:</div>

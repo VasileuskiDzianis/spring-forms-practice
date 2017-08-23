@@ -19,6 +19,16 @@ import by.htp.spring_tags.domain.Skill;
 import by.htp.spring_tags.domain.User;
 
 public class UserDaoImplTest extends UserDaoImpl {
+	private final static int USER_ID = 1;
+	private final static String USER_EXPECTED_LOGIN = "Shield";
+	private final static String USER_EXPECTED_PASSWORD = "qwerty";
+	private final static int USER_EXPECTED_AGE = 54;
+	private final static String USER_EXPECTED_CITY = "Dallas";
+	private final static String USER_EXPECTED_LANGUAGE = "en";
+	private final static int USER_EXPECTED_NUMBER_OF_SKILLS = 3;
+	private final static int EXPECTED_SKILL_ID = 2;
+	private final static String EXPECTED_SKILL_NAME = "Python";
+	
 	private ComboPooledDataSource dataSource;
 	private UserDaoImpl userDao;
 
@@ -37,23 +47,20 @@ public class UserDaoImplTest extends UserDaoImpl {
 
 	@Test
 	public void getUserById() {
-		int testUserId = 1;
-		String testUserExpectedLogin = "Shield";
-		String testUserExpectedPassword = "qwerty";
-		String testUserExpectedCity = "Dallas";
-		String testUserExpectedLanguage = "en";
-		int testUserExpectedNumberOfSkills = 3;
+		
+		
 		Skill testUserExpectedSkill = new Skill();
-		testUserExpectedSkill.setId(2);
-		testUserExpectedSkill.setSkillName("Python");
+		testUserExpectedSkill.setId(EXPECTED_SKILL_ID);
+		testUserExpectedSkill.setSkillName(EXPECTED_SKILL_NAME);
 		
-		User user = userDao.findUserById(testUserId);
+		User user = userDao.findUserById(USER_ID);
 		
-		assertEquals(testUserExpectedLogin, user.getLogin());
-		assertEquals(testUserExpectedPassword, user.getPassword());
-		assertEquals(testUserExpectedCity, user.getAddress().getCity());
-		assertEquals(testUserExpectedLanguage, user.getLocale().getLanguage());
-		assertEquals(testUserExpectedNumberOfSkills, user.getSkills().size());
+		assertEquals(USER_EXPECTED_LOGIN, user.getLogin());
+		assertEquals(USER_EXPECTED_PASSWORD, user.getPassword());
+		assertEquals(USER_EXPECTED_AGE, user.getAge());
+		assertEquals(USER_EXPECTED_CITY, user.getAddress().getCity());
+		assertEquals(USER_EXPECTED_LANGUAGE, user.getLocale().getLanguage());
+		assertEquals(USER_EXPECTED_NUMBER_OF_SKILLS, user.getSkills().size());
 		assertTrue(user.getSkills().contains(testUserExpectedSkill));
 		
 	}

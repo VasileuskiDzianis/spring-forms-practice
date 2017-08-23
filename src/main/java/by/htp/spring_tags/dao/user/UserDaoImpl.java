@@ -22,13 +22,14 @@ public class UserDaoImpl implements UserDao {
 			+ "LEFT JOIN skill ON user_skill.skill=skill.skillId "
 			+ "LEFT JOIN address ON user.address=address.addressId WHERE user.userId=?;";
 	
-	private static final String REQ_ADD_USER = "INSERT INTO user(login, password, address, locale) VALUES (?,?,?,?);";
+	private static final String REQ_ADD_USER = "INSERT INTO user(login, password, address, age,locale) VALUES (?,?,?,?,?);";
 	private static final String REQ_ADD_USER_TO_JOIN_TABLE = "INSERT INTO user_skill VALUES (?,?);";
 
 	private static final String COLUMN_USER_ID = "userId";
 	private static final String COLUMN_USER_LOGIN = "login";
 	private static final String COLUMN_USER_PASSWORD = "password";
 	private static final String COLUMN_USER_LOCALE = "locale";
+	private static final String COLUMN_USER_AGE = "age";
 
 	@Autowired
 	private DataSource dataSource;
@@ -50,7 +51,8 @@ public class UserDaoImpl implements UserDao {
 			statementUser.setString(1, user.getLogin());
 			statementUser.setString(2, user.getPassword());
 			statementUser.setInt(3, user.getAddress().getId());
-			statementUser.setString(4, user.getLocale().getLanguage());
+			statementUser.setInt(4, user.getAge());
+			statementUser.setString(5, user.getLocale().getLanguage());
 			statementUser.execute();
 			resultSet = statementUser.getGeneratedKeys();
 
@@ -119,6 +121,7 @@ public class UserDaoImpl implements UserDao {
 				user.setId(resultSet.getInt(COLUMN_USER_ID));
 				user.setLogin(resultSet.getString(COLUMN_USER_LOGIN));
 				user.setPassword(resultSet.getString(COLUMN_USER_PASSWORD));
+				user.setAge(resultSet.getInt(COLUMN_USER_AGE));
 				user.setLocale(new Locale(resultSet.getString(COLUMN_USER_LOCALE)));
 
 				address = new Address();

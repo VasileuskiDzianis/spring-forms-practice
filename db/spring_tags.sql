@@ -4,6 +4,7 @@ CREATE TABLE user (
 	login VARCHAR(90) NOT NULL,
 	password VARCHAR(100) NOT NULL,
 	address INT NOT NULL,
+	age INT NOT NULL,
 	locale VARCHAR(3),
 	KEY addressId (address),
 	PRIMARY KEY (userId)
@@ -34,7 +35,7 @@ CREATE TABLE user_skill (
 
 LOCK TABLES user WRITE, address WRITE, skill WRITE, user_skill WRITE;
 
-INSERT INTO user VALUES ('1', 'Shield', 'qwerty', '1', 'en'), ('2', 'Ekkel', 'password', '2', 'fr');
+INSERT INTO user VALUES ('1', 'Shield', 'qwerty', '1', '54', 'en'), ('2', 'Ekkel', 'password', '2', '60', 'fr');
 INSERT INTO address VALUES ('1', 'United States', 'Dallas'), ('2', 'France', 'Paris');
 INSERT INTO skill VALUES ('1', 'Java'), ('2', 'Python'), ('3', 'SQL'), ('4', 'C++'), ('5', 'Spring'), ('6', 'Hibernate'), ('7', 'JavaScript');
 INSERT INTO user_skill VALUES ('1','1'), ('1','2'), ('1', '3'), ('2','2'), ('2','3'), ('2', '4'); 
