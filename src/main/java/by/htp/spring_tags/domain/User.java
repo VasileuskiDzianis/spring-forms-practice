@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -22,8 +25,14 @@ public class User {
 	@Valid
 	private Address address;
 	
+	@Min(value = 18, message = "too young")
+	@Max(value = 120, message = "too old")
+	@Digits(integer = 3, fraction = 0, message = "incorrect number")
 	private int age;
+	
 	private Locale locale;
+	
+	@NotNull(message = "one skill at least")
 	private List<Skill> skills;
 
 	public int getId() {

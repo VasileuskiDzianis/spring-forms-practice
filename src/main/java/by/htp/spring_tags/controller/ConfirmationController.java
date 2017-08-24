@@ -1,8 +1,6 @@
 package by.htp.spring_tags.controller;
 
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 
 import javax.validation.Valid;
 
@@ -12,13 +10,10 @@ import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
-import by.htp.spring_tags.domain.Address;
 import by.htp.spring_tags.domain.Skill;
 import by.htp.spring_tags.domain.User;
 import by.htp.spring_tags.service.skill.SkillService;
@@ -47,25 +42,61 @@ public class ConfirmationController {
 			Model model) {
 
 		if (bindingResult.hasErrors()) {
-			
+			if (isNoOneSkillSelected(user)) {
+				bindingResult.addError(new FieldError("user", "skills", "one skill at least"));
+			}
+
+			int[] chosenSkills = getChosenSkills(user);
+			List<Skill> availableSkills = skillService.findAllSkills();
+			model.addAttribute("skills", availableSkills);
 			model.addAttribute("countries", countries);
-			
+			model.addAttribute("chosenSkills", chosenSkills);
+
 			return "registration";
 		}
 
 		List<Skill> skills = user.getSkills();
 
+		// we have to remove all not selected skills, that have zero id's, because of
+		// hidden fields in registration form
 		for (int i = 0; i < skills.size(); i++) {
 			if (skills.get(i).getId() == 0) {
 				skills.remove(i);
 			}
 		}
+		
 		user.setLocale(locale);
 		userService.saveUserAndSetId(user);
-		User storedUser = userService.findUserById(user.getId());
-
-		model.addAttribute("storedUser", storedUser);
+		
+		model.addAttribute("storedUser", userService.findUserById(user.getId()));
 
 		return "confirmation";
+	}
+
+	private boolean isNoOneSkillSelected(User user) {
+		List<Skill> selectedSkills = user.getSkills();
+		int numberOfSelectedSkills = 0;
+
+		for (Skill skill : selectedSkills) {
+			if (skill.getId() > 0) {
+				numberOfSelectedSkills++;
+			}
+		}
+		if (numberOfSelectedSkills == 0) {
+
+			return true;
+		}
+		return false;
+	}
+
+	private int[] getChosenSkills(User user) {
+		List<Skill> skills = user.getSkills();
+		int[] chosenSkills = new int[skills.size()];
+		for (int i = 0; i < skills.size(); i++) {
+			if (skills.get(i).getId() != 0) {
+				chosenSkills[i] = 1;
+			}
+		}
+		return chosenSkills;
 	}
 }

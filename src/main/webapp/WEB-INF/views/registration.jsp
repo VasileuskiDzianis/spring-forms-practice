@@ -28,7 +28,10 @@
 		</div>
 		<form:password path="password" cssClass="form-field" />
 
-		<div class="form-title">Age:</div>
+		<div class="form-title">
+			Age:
+			<form:errors path="age" cssClass="error" />
+		</div>
 		<form:input path="age" cssClass="form-field" />
 
 		<div class="form-title">
@@ -44,10 +47,15 @@
 		</div>
 		<form:input path="address.city" cssClass="form-field" />
 
-		<div class="form-title">Skills:</div>
-		<c:forEach var="skill" items="${user.skills}" varStatus="status">
+		<div class="form-title">
+			Skills:
+			<form:errors path="skills" cssClass="error" />
+		</div>
+
+		<c:forEach var="skill" items="${skills}" varStatus="status">
 			<input id="skill[${status.index}]" type="checkbox"
-				name="skills[${status.index}].id" value="${skill.id}" />
+				name="skills[${status.index}].id" value="${skill.id}"
+				<c:if test = "${chosenSkills[status.index] > 0}"> checked</c:if> />
 			<input type="hidden" name="skills[${status.index}].skillName"
 				value="${skill.skillName}" />
 			<label for="skill[${status.index}]">${skill.skillName}</label>
