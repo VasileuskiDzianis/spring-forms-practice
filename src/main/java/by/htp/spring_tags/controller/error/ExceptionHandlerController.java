@@ -11,8 +11,8 @@ public class ExceptionHandlerController {
 
 	@ExceptionHandler
 	public String handle(Exception e, Model model) {
-
-		LOGGER.error("Exception occur, ", e);
+		
+		LOGGER.error("Exception occured, ", e);
 		
 		model.addAttribute("message", "Oops. Internal error occured...");
 
