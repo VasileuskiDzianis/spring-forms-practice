@@ -7,7 +7,7 @@ public class Address {
 	private int id;
 	
 	@NotNull(message="can not be empty")
-	@Size(min=3, message="3 chars minimum")
+	@Size(min=2, message="2 chars minimum")
 	private String country;
 	
 	@NotNull(message="can not be empty")
