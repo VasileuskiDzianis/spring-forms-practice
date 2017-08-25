@@ -40,23 +40,23 @@ public class ConfirmationController {
 	@RequestMapping(value = "/confirm", method = RequestMethod.POST)
 	public String confirm(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, Locale locale,
 			Model model) {
-
+		
 		if (bindingResult.hasErrors()) {
 			if (isNoOneSkillSelected(user)) {
 				bindingResult.addError(new FieldError("user", "skills", "one skill at least"));
 			}
-
+			
 			int[] chosenSkills = getChosenSkills(user);
 			List<Skill> availableSkills = skillService.findAllSkills();
 			model.addAttribute("skills", availableSkills);
 			model.addAttribute("countries", countries);
 			model.addAttribute("chosenSkills", chosenSkills);
-
+			
 			return "registration";
 		}
-
+		
 		List<Skill> skills = user.getSkills();
-
+		
 		// we have to remove all not selected skills, that have zero id's, because of
 		// hidden fields in registration form
 		for (int i = 0; i < skills.size(); i++) {
@@ -69,8 +69,14 @@ public class ConfirmationController {
 		userService.saveUserAndSetId(user);
 		
 		model.addAttribute("storedUser", userService.findUserById(user.getId()));
-
+		
 		return "confirmation";
+	}
+	
+	@RequestMapping(value = "/confirm", method = RequestMethod.GET)
+	public String confirmGet() {
+
+		return "redirect:register";
 	}
 
 	private boolean isNoOneSkillSelected(User user) {
