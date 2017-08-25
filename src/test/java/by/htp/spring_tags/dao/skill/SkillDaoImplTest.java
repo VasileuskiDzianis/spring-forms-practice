@@ -6,24 +6,24 @@ import java.beans.PropertyVetoException;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.dbcp2.BasicDataSource;
 import org.junit.Before;
 import org.junit.Test;
-import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 import by.htp.spring_tags.domain.Skill;
 
 public class SkillDaoImplTest {
-	private ComboPooledDataSource dataSource;
+	private BasicDataSource dataSource;
 	private SkillDaoImpl skillDao;
 
 	@Before
 	public void setUp() throws PropertyVetoException {
-		dataSource = new ComboPooledDataSource();
+		dataSource = new BasicDataSource();
 		skillDao = new SkillDaoImpl();
 
-		dataSource.setDriverClass("com.mysql.cj.jdbc.Driver");
-		dataSource.setJdbcUrl("jdbc:mysql://127.0.0.1/spring_tags");
-		dataSource.setUser("spring");
+		dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+		dataSource.setUrl("jdbc:mysql://127.0.0.1/spring_tags");
+		dataSource.setUsername("spring");
 		dataSource.setPassword("qwerty");
 
 		skillDao.setDataSource(dataSource);
