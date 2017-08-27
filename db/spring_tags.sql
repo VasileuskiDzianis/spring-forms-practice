@@ -39,13 +39,13 @@ LOCK TABLES user WRITE, address WRITE, skill WRITE, user_skill WRITE;
 INSERT INTO user VALUES 
 	('1', 'Shield', 'qwerty', '1', '54', 'en', 'ACTIVE'), 
 	('2', 'Ekkel', 'password', '2', '60', 'fr', 'ACTIVE'),
-	('3', 'Horstmann', 'goodbook', '3', '55', 'en', 'DELETED');
+	('3', 'Horstmann', 'goodbook', '3', '55', 'en', 'DISABLED');
 
 INSERT INTO address VALUES 
 	('1', 'United States', 'Dallas'), 
 	('2', 'France', 'Paris'), 
 	('3', 'United States', 'Chicago');
-
+	
 INSERT INTO skill VALUES 
 	('1', 'Java'), 
 	('2', 'Python'), 
@@ -58,6 +58,6 @@ INSERT INTO skill VALUES
 INSERT INTO user_skill VALUES 
 	('1','1'), ('1','2'), ('1', '3'), 
 	('2','2'), ('2','3'), ('2', '4'), 
-	('3','1'); 
+	('3','1');
 
 UNLOCK TABLES;

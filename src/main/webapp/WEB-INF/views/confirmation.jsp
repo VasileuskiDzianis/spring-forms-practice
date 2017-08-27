@@ -11,7 +11,7 @@
 	<br /> login: ${storedUser.login}
 	<br /> password: ${storedUser.password}
 	<br /> age: ${storedUser.age}
-	<br /> locale: ${storedUser.locale.language}
+	<br /> locale: ${storedUser.locale}
 	<br /> country: ${storedUser.address.country}
 	<br /> city: ${storedUser.address.city}
 	<br /> skills:

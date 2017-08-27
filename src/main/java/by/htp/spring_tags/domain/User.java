@@ -58,7 +58,7 @@ public class User {
 	private String locale;
 
 	@NotNull(message = "one skill at least")
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
 	@JoinTable(name = "user_skill", joinColumns = @JoinColumn(name = "user"), inverseJoinColumns = @JoinColumn(name = "skill"))
 	private List<Skill> skills;
 

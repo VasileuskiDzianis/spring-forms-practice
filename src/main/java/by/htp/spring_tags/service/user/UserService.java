@@ -12,4 +12,6 @@ public interface UserService {
 	User findUserById(int id);
 	
 	List<User> findAllByStatus(UserStatus status);
+	
+	void disableUser(User user);
 }

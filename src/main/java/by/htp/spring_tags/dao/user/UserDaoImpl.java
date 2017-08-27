@@ -16,9 +16,10 @@ public class UserDaoImpl implements UserDao {
 	@Resource(name = "sessionFactory")
 	private SessionFactory sessionFactory;
 
+	@Transactional
 	@Override
 	public int saveUser(User user) {
-		sessionFactory.getCurrentSession().save(user);
+		sessionFactory.getCurrentSession().saveOrUpdate(user);
 
 		return user.getId();
 	}
@@ -29,13 +30,14 @@ public class UserDaoImpl implements UserDao {
 
 		return sessionFactory.getCurrentSession().get(User.class, id);
 	}
-
+	@Transactional
 	@Override
 	public void deleteUser(User user) {
-		// TODO Auto-generated method stub
-
+		
+		sessionFactory.getCurrentSession().delete(user);
 	}
-
+	
+	@Transactional(readOnly = true)
 	@Override
 	public List<User> findAllByStatus(UserStatus stat) {
 

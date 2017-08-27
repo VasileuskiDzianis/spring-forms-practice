@@ -17,8 +17,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void saveUser(User user) {
-		if (user == null || user.getAddress() == null || user.getSkills() == null || user.getLocale() == null
-				|| user.getLogin() == null || user.getPassword() == null) {
+		if (isUserNotValid(user)) {
 
 			throw new IllegalArgumentException();
 		}
@@ -33,7 +32,30 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<User> findAllByStatus(UserStatus status) {
-		
+		if (status == null) {
+
+			throw new IllegalArgumentException();
+		}
 		return userDao.findAllByStatus(status);
+	}
+
+	@Override
+	public void disableUser(User user) {
+		if (isUserNotValid(user)) {
+
+			throw new IllegalArgumentException();
+		}
+		user.setStatus(UserStatus.DISABLED);
+
+		userDao.saveUser(user);
+	}
+
+	private boolean isUserNotValid(User user) {
+		if (user == null || user.getAddress() == null || user.getSkills() == null || user.getLocale() == null
+				|| user.getLogin() == null || user.getPassword() == null) {
+
+			return true;
+		}
+		return false;
 	}
 }

@@ -73,6 +73,7 @@ public class RegistrationProcessController {
 		for (int i = 0; i < skills.size(); i++) {
 			if (skills.get(i).getId() == 0) {
 				skills.remove(i);
+				i--;
 			}
 		}
 	}
