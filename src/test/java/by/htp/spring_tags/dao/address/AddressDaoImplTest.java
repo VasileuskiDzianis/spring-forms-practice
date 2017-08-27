@@ -4,39 +4,37 @@ import static org.junit.Assert.assertFalse;
 
 import java.beans.PropertyVetoException;
 
-import org.apache.commons.dbcp2.BasicDataSource;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import by.htp.spring_tags.domain.Address;
 
 public class AddressDaoImplTest extends AddressDaoImpl {
-	private BasicDataSource dataSource;
-	private AddressDaoImpl addressDao;
+	private AddressDao addressDao;
+	private ClassPathXmlApplicationContext context;
 
 	@Before
 	public void setUp() throws PropertyVetoException {
-		dataSource = new BasicDataSource();
-		addressDao = new AddressDaoImpl();
 
-		dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://127.0.0.1/spring_tags");
-		dataSource.setUsername("spring");
-		dataSource.setPassword("qwerty");
-
-		addressDao.setDataSource(dataSource);
+		context = new ClassPathXmlApplicationContext("test_spring_context.xml");
+		addressDao = (AddressDao) context.getBean("addressDaoImpl");
 	}
 
 	@Test
-	public void addAddressTest() {
+	public void saveAddressTest() {
 		Address address = new Address();
-
-		address.setCountry("United Kingdom");
-		address.setCity("London");
+		address.setCountry("Germany");
+		address.setCity("Berlin");
 
 		int returnedId = addressDao.saveAddress(address);
 
 		assertFalse(returnedId == 0);
 	}
 
+	@After
+	public void destroyResources() {
+		context.close();
+	}
 }

@@ -20,7 +20,7 @@ import by.htp.spring_tags.service.skill.SkillService;
 import by.htp.spring_tags.service.user.UserService;
 
 @Controller
-public class ConfirmationController {
+public class RegistrationProcessController {
 
 	@Autowired
 	UserService userService;
@@ -38,7 +38,7 @@ public class ConfirmationController {
 	}
 
 	@RequestMapping(value = "/confirm", method = RequestMethod.POST)
-	public String confirm(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, Locale locale,
+	public String confirmRegistration(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, Locale locale,
 			Model model) {
 		
 		if (bindingResult.hasErrors()) {
@@ -54,19 +54,9 @@ public class ConfirmationController {
 			
 			return "registration";
 		}
-		
-		List<Skill> skills = user.getSkills();
-		
-		// we have to remove all not selected skills, that have zero id's, because of
-		// hidden fields in registration form
-		for (int i = 0; i < skills.size(); i++) {
-			if (skills.get(i).getId() == 0) {
-				skills.remove(i);
-			}
-		}
-		
-		user.setLocale(locale);
-		userService.saveUserAndSetId(user);
+		removeNotSelectedSkills(user.getSkills());
+		user.setLocale(locale.getLanguage());
+		userService.saveUser(user);
 		
 		model.addAttribute("storedUser", userService.findUserById(user.getId()));
 		
@@ -79,6 +69,14 @@ public class ConfirmationController {
 		return "redirect:register";
 	}
 
+	private void removeNotSelectedSkills(List<Skill> skills) {
+		for (int i = 0; i < skills.size(); i++) {
+			if (skills.get(i).getId() == 0) {
+				skills.remove(i);
+			}
+		}
+	}
+	
 	private boolean isNoOneSkillSelected(User user) {
 		List<Skill> selectedSkills = user.getSkills();
 		int numberOfSelectedSkills = 0;

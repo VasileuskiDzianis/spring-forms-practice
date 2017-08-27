@@ -14,7 +14,7 @@ import by.htp.spring_tags.domain.User;
 import by.htp.spring_tags.service.skill.SkillService;
 
 @Controller
-public class RegistrationController {
+public class RegistrationFormController {
 	@Autowired
 	SkillService skillService;
 	
@@ -22,7 +22,7 @@ public class RegistrationController {
 	Map<String,String> countries;
 	
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
+	public String showRegistrationForm(Locale locale, Model model) {
 		User user = new User();
 		List<Skill> skills = skillService.findAllSkills();
 

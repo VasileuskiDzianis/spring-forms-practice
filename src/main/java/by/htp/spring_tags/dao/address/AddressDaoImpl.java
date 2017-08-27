@@ -1,64 +1,28 @@
 package by.htp.spring_tags.dao.address;
 
-import java.sql.*;
-
-import javax.sql.DataSource;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
+import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
-
-import com.mysql.cj.api.jdbc.Statement;
+import org.springframework.transaction.annotation.Transactional;
 
 import by.htp.spring_tags.domain.Address;
 
+@Transactional
 @Repository
 public class AddressDaoImpl implements AddressDao {
-	private static String REQ_ADD_ADDRESS = "INSERT INTO address (country, city) VALUES (?, ?);";
 
-	@Autowired
-	private DataSource dataSource;
+	@Resource(name = "sessionFactory")
+	private SessionFactory sessionFactory;
 
-	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
 	}
-
+	
 	@Override
-	public int saveAddress(Address address) throws RuntimeException {
-		Connection connection = null;
-		PreparedStatement prepStatement = null;
-		ResultSet resultSet = null;
+	public int saveAddress(Address address) {
+		
+		sessionFactory.getCurrentSession().save(address);
 
-		try {
-			connection = dataSource.getConnection();
-			prepStatement = connection.prepareStatement(REQ_ADD_ADDRESS, Statement.RETURN_GENERATED_KEYS);
-			prepStatement.setString(1, address.getCountry());
-			prepStatement.setString(2, address.getCity());
-			prepStatement.execute();
-			resultSet = prepStatement.getGeneratedKeys();
-
-			if (resultSet.next()) {
-
-				return resultSet.getInt(1);
-			}
-		} catch (SQLException e) {
-			throw new RuntimeException("Error getting skill by id", e);
-		} finally {
-
-			try {
-				if (resultSet != null) {
-					resultSet.close();
-				}
-				if (prepStatement != null) {
-					prepStatement.close();
-				}
-				if (connection != null) {
-					connection.close();
-				}
-			} catch (SQLException e) {
-				throw new RuntimeException("Error resources closing", e);
-			}
-		}
-
-		return 0;
+		return address.getId();
 	}
 }

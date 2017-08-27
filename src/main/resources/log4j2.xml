@@ -2,7 +2,6 @@
 <Configuration status="WARN">
 
 	<Appenders>
-<!-- 		<File name="File" fileName="${catalina.home}/logs/registration.log"> -->
 		<File name="File" fileName="registration.log">
 			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n" />
 		</File>

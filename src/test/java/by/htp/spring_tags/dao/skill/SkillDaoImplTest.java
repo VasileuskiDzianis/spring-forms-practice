@@ -1,44 +1,37 @@
 package by.htp.spring_tags.dao.skill;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-import java.beans.PropertyVetoException;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.commons.dbcp2.BasicDataSource;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import by.htp.spring_tags.domain.Skill;
 
 public class SkillDaoImplTest {
-	private BasicDataSource dataSource;
-	private SkillDaoImpl skillDao;
+	private SkillDao skillDao;
+	private ClassPathXmlApplicationContext context;
 
 	@Before
-	public void setUp() throws PropertyVetoException {
-		dataSource = new BasicDataSource();
-		skillDao = new SkillDaoImpl();
-
-		dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://127.0.0.1/spring_tags");
-		dataSource.setUsername("spring");
-		dataSource.setPassword("qwerty");
-
-		skillDao.setDataSource(dataSource);
+	public void setUp() {
+		context = new ClassPathXmlApplicationContext("test_spring_context.xml");
+		skillDao = (SkillDao) context.getBean("skillDaoImpl");
 	}
 
 	@Test
-	public void testGetSkillById() throws RuntimeException {
+	public void testGetSkillById() {
 		int skillId = 2;
 		String expectedSkillName = "Python";
-
 		Skill skill = skillDao.findSkillById(skillId);
 
 		assertEquals(expectedSkillName, skill.getSkillName());
 	}
-	
+
 	@Test
 	public void getAllSkillsTest() {
 		int skillIdFirst = 1;
@@ -51,11 +44,15 @@ public class SkillDaoImplTest {
 		Skill skillSecond = new Skill();
 		skillSecond.setId(skillIdSecond);
 		skillSecond.setSkillName(expectedSkillNameSecond);
-		
+	
 		List<Skill> expectedSkills = Arrays.asList(skillFirst, skillSecond);
 		List<Skill> gotSkills = skillDao.findAllSkills();
-		
+
 		assertTrue(gotSkills.containsAll(expectedSkills));
-		
+	}
+
+	@After
+	public void closeResources() {
+		context.close();
 	}
 }

@@ -1,8 +1,21 @@
 package by.htp.spring_tags.domain;
 
 import java.util.List;
-import java.util.Locale;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Max;
@@ -10,30 +23,48 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+@Entity
+@Table(name = "user")
 public class User {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "userId")
 	private int id;
-	
-	@NotNull(message="can not be empty")
-	@Size(min=8, message="8 chars minimum")
+
+	@NotNull(message = "can not be empty")
+	@Size(min = 8, message = "8 chars minimum")
+	@Column(name = "login")
 	private String login;
-	
-	@NotNull(message="can not be empty")
-	@Size(min=8, message="8 chars minimum")
+
+	@NotNull(message = "can not be empty")
+	@Size(min = 8, message = "8 chars minimum")
+	@Column(name = "password")
 	private String password;
-	
-	@NotNull(message="can not be empty")
+
+	@NotNull(message = "can not be empty")
 	@Valid
+	@OneToOne(optional = false, cascade = CascadeType.ALL)
+	@JoinColumn(name = "address")
 	private Address address;
-	
+
 	@Min(value = 18, message = "too young")
 	@Max(value = 120, message = "too old")
 	@Digits(integer = 3, fraction = 0, message = "incorrect number")
+	@Column(name = "age")
 	private int age;
-	
-	private Locale locale;
-	
+
+	@Column(name = "locale")
+	private String locale;
+
 	@NotNull(message = "one skill at least")
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(name = "user_skill", joinColumns = @JoinColumn(name = "user"), inverseJoinColumns = @JoinColumn(name = "skill"))
 	private List<Skill> skills;
+
+	@Column(name = "status")
+	@Enumerated(EnumType.STRING)
+	UserStatus status;
 
 	public int getId() {
 		return id;
@@ -75,11 +106,11 @@ public class User {
 		this.age = age;
 	}
 
-	public Locale getLocale() {
+	public String getLocale() {
 		return locale;
 	}
 
-	public void setLocale(Locale locale) {
+	public void setLocale(String locale) {
 		this.locale = locale;
 	}
 
@@ -89,6 +120,14 @@ public class User {
 
 	public void setSkills(List<Skill> skills) {
 		this.skills = skills;
+	}
+
+	public UserStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(UserStatus status) {
+		this.status = status;
 	}
 
 	@Override
@@ -102,6 +141,7 @@ public class User {
 		result = prime * result + ((login == null) ? 0 : login.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((skills == null) ? 0 : skills.hashCode());
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		return result;
 	}
 
@@ -143,12 +183,15 @@ public class User {
 				return false;
 		} else if (!skills.equals(other.skills))
 			return false;
+		if (status != other.status)
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", login=" + login + ", password=" + password + ", address=" + address + ", age="
-				+ age + ", locale=" + locale + ", skills=" + skills + "]";
+				+ age + ", locale=" + locale + ", skills=" + skills + ", status=" + status + "]";
 	}
+
 }

@@ -1,7 +1,17 @@
 package by.htp.spring_tags.domain;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "skill")
 public class Skill {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "skillId")
 	private int id;
+
+	@Column(name = "skillName")
 	private String skillName;
 
 	public int getId() {
