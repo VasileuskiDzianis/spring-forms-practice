@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
 
 	private boolean isUserNotValid(User user) {
 		if (user == null || user.getAddress() == null || user.getSkills() == null || user.getLocale() == null
-				|| user.getLogin() == null || user.getPassword() == null) {
+				|| user.getLogin() == null || user.getPassword() == null || user.getStatus() == null) {
 
 			return true;
 		}

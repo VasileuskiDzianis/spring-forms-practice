@@ -3,7 +3,7 @@ body {
 	color: #725129;
 }
 
-.rates-container {
+.line-item {
 	border: 1px solid #f2e3d2;
 	background: #c9b7a2;
 	background: -webkit-gradient(linear, left top, left bottom, from(#f2e3d2),
@@ -26,11 +26,11 @@ body {
 	text-decoration: none;
 	vertical-align: middle;
 	min-width: 300px;
-	padding: 20px;
-	width: 500px;
-	color: #725129;
+	padding: 5px;
+	width: 400px;
 	margin: auto;
 	margin-top: 10px;
+	text-align: right;
 }
 
 .form-container {
@@ -85,7 +85,7 @@ body {
 	color: #725129;
 }
 
-.form-container h2, .rates-container h2 {
+.form-container h2 {
 	text-shadow: #fdf2e4 0 1px 0;
 	font-size: 18px;
 	margin: 0 0 10px 0;
@@ -126,7 +126,7 @@ body {
 	text-shadow: #addc7e 0 1px 0;
 	color: #31540c;
 	font-family: helvetica, serif;
-	padding: 8.5px 18px;
+	padding: 5px 5px;
 	font-size: 14px;
 	text-decoration: none;
 	vertical-align: middle;
@@ -162,4 +162,119 @@ body {
 
 .error {
 	color: #ff0000;
+}
+
+#headerMain {
+	width: 700px;
+	height: 90px;
+	margin: 0px auto;
+	z-index: 0;
+}
+
+#header {
+	width: 700px;
+	height: 40px;
+	background: url(../img/bg-header.jpg) no-repeat;
+	position: fixed;
+	z-index: 9999;
+	border: 1px solid #f2e3d2;
+	background: #c9b7a2;
+	background: -webkit-gradient(linear, left top, left bottom, from(#f2e3d2),
+		to(#c9b7a2));
+	background: -webkit-linear-gradient(top, #f2e3d2, #c9b7a2);
+	background: -moz-linear-gradient(top, #f2e3d2, #c9b7a2);
+	background: -ms-linear-gradient(top, #f2e3d2, #c9b7a2);
+	background: -o-linear-gradient(top, #f2e3d2, #c9b7a2);
+	background-image: -ms-linear-gradient(top, #f2e3d2 0%, #c9b7a2 100%);
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	border-radius: 0px;
+	-webkit-box-shadow: rgba(000, 000, 000, 0.9) 0 1px 2px, inset
+		rgba(255, 255, 255, 0.4) 0 0px 0;
+	-moz-box-shadow: rgba(000, 000, 000, 0.9) 0 1px 2px, inset
+		rgba(255, 255, 255, 0.4) 0 0px 0;
+	box-shadow: rgba(000, 000, 000, 0.9) 0 1px 2px, inset
+		rgba(255, 255, 255, 0.4) 0 0px 0;
+	font-family: 'Helvetica Neue', Helvetica, sans-serif;
+	text-decoration: none;
+	vertical-align: middle;
+	text-align: center;
+	min-width: 300px;
+	padding: 10px;
+	margin: auto;
+	margin-top: 10px;
+
+}
+
+* {
+	margin: 0px auto;
+	padding: 0;
+}
+
+html, body {
+	height: 100%;
+}
+
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	height: 10%;
+}
+
+.content {
+	margin-top: 20px;
+	flex: 1 0 auto;
+	text-align: center;
+	vertical-align: middle;
+	width: 700px;
+	
+	border: 1px solid #f2e3d2;
+	background: #c9b7a2;
+	background: -webkit-gradient(linear, left top, left bottom, from(#f2e3d2),
+		to(#c9b7a2));
+	background: -webkit-linear-gradient(top, #f2e3d2, #c9b7a2);
+	background: -moz-linear-gradient(top, #f2e3d2, #c9b7a2);
+	background: -ms-linear-gradient(top, #f2e3d2, #c9b7a2);
+	background: -o-linear-gradient(top, #f2e3d2, #c9b7a2);
+	background-image: -ms-linear-gradient(top, #f2e3d2 0%, #c9b7a2 100%);
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	border-radius: 0px;
+	-webkit-box-shadow: rgba(000, 000, 000, 0.9) 0 1px 2px, inset
+		rgba(255, 255, 255, 0.4) 0 0px 0;
+	-moz-box-shadow: rgba(000, 000, 000, 0.9) 0 1px 2px, inset
+		rgba(255, 255, 255, 0.4) 0 0px 0;
+	box-shadow: rgba(000, 000, 000, 0.9) 0 1px 2px, inset
+		rgba(255, 255, 255, 0.4) 0 0px 0;
+	font-family: 'Helvetica Neue', Helvetica, sans-serif;
+	text-decoration: none;
+}
+
+.footer {
+	flex: 0 0 auto;
+}
+
+a:link{
+	color: #725129;
+	text-decoration: none;
+}
+
+a:visited {
+	color: #725129;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #90694a;
+	text-decoration: underline;
+}
+
+a:active {
+	color: gray;
+	text-decoration: none;
+}
+
+.home_content {
+	width: 700px;
+	text-align: justify;
 }

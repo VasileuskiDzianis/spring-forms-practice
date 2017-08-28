@@ -4,10 +4,12 @@
 <html>
 <head>
 <title>Message</title>
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/resources/form.css"/>" />
 </head>
 <body>
-
-	<h1>${message}</h1>
-
+	<%@ include file="header.jsp"%>
+	<h2 class="home_content">${message}</h2>
+	<%@ include file="footer.jsp"%>
 </body>
 </html>
