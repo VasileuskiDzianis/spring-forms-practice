@@ -267,6 +267,7 @@ a:visited {
 a:hover {
 	color: #90694a;
 	text-decoration: underline;
+	font-weight: bold;
 }
 
 a:active {

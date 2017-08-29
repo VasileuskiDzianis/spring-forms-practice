@@ -6,10 +6,11 @@
 <title>User details</title>
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/resources/form.css"/>" />
+	<script src="<c:url value="/resources/enable_form.js"/>"></script>
 </head>
 <body>
 	<%@ include file="header.jsp"%>
-	<form:form action="id${user.id}" modelAttribute="user"
+	<form:form id="user_details" action="id${user.id}" modelAttribute="user"
 		cssClass="form-container">
 		<div class="form-title">
 			<h2>User details.</h2>
@@ -21,32 +22,32 @@
 			Login:
 			<form:errors path="login" cssClass="error" />
 		</div>
-		<form:input path="login" cssClass="form-field" />
+		<form:input path="login" cssClass="form-field" disabled="disabled"/>
 
 
 		<div class="form-title">
-			Password:
+			New password:
 			<form:errors path="password" cssClass="error" />
 		</div>
-		<form:password path="password" cssClass="form-field" />
+		<form:password path="password" cssClass="form-field" disabled="disabled"/>
 
 		<div class="form-title">
 			Age:
 			<form:errors path="age" cssClass="error" />
 		</div>
-		<form:input path="age" cssClass="form-field" />
+		<form:input path="age" cssClass="form-field" disabled="disabled"/>
 
 		<div class="form-title">
 			Country:
 			<form:errors path="address.country" cssClass="error" />
 		</div>
-		<form:input path="address.country" cssClass="form-field" />
+		<form:input path="address.country" cssClass="form-field" disabled="disabled"/>
 
 		<div class="form-title">
 			City:
 			<form:errors path="address.city" cssClass="error" />
 		</div>
-		<form:input path="address.city" cssClass="form-field" />
+		<form:input path="address.city" cssClass="form-field" disabled="disabled"/>
 
 		<div class="form-title">
 			Skills:
@@ -54,9 +55,9 @@
 		</div>
 
 		<c:forEach var="skill" items="${user.skills}" varStatus="status">
-			<input id="skill[${status.index}]" type="checkbox"
+			<input disabled="disabled" id="skill[${status.index}]" type="checkbox"
 				name="skills[${status.index}].id" value="${skill.id}" 
-				<c:if test = "${status.index < selectedSkillsNumber}">checked</c:if> />
+				<c:if test = "${status.index < selectedSkillsNumber}">checked</c:if>/>
 			<input type="hidden" name="skills[${status.index}].skillName"
 				value="${skill.skillName}" />
 			<label for="skill[${status.index}]">${skill.skillName}</label>
@@ -64,7 +65,8 @@
 		</c:forEach>
 		
 		<div class="submit-container">
-			<input type="submit" value="Save" class="submit-button" />
+			<input id="update_button" type="submit" value="Update" class="submit-button" style="visibility: hidden"/>
+			<button type="button" class="submit-button" onclick="enableForm('user_details', 'update_button')">Edit</button>
 		</div>
 	</form:form>
 	<%@ include file="footer.jsp"%>
