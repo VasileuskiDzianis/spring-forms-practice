@@ -6,12 +6,14 @@ import by.htp.spring_tags.domain.User;
 import by.htp.spring_tags.domain.UserStatus;
 
 public interface UserService {
-	
+
 	void saveUser(User user);
-	
+
 	User findUserById(int id);
-	
+
 	List<User> findAllByStatus(UserStatus status);
-	
+
 	void disableUser(User user);
+
+	boolean isUserRegistered(User user);
 }

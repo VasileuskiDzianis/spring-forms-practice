@@ -11,6 +11,7 @@ import by.htp.spring_tags.domain.UserStatus;
 
 @Service
 public class UserServiceImpl implements UserService {
+	private static final int NOT_REGISTERED_USER_ID = 0;
 
 	@Autowired
 	private UserDao userDao;
@@ -46,8 +47,13 @@ public class UserServiceImpl implements UserService {
 			throw new IllegalArgumentException();
 		}
 		user.setStatus(UserStatus.DISABLED);
-
 		userDao.saveUser(user);
+	}
+
+	@Override
+	public boolean isUserRegistered(User user) {
+
+		return (user.getId() > NOT_REGISTERED_USER_ID) ? true : false;
 	}
 
 	private boolean isUserNotValid(User user) {

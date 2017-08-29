@@ -52,10 +52,10 @@
 			<form:errors path="skills" cssClass="error" />
 		</div>
 
-		<c:forEach var="skill" items="${skills}" varStatus="status">
+		<c:forEach var="skill" items="${user.skills}" varStatus="status">
 			<input id="skill[${status.index}]" type="checkbox"
 				name="skills[${status.index}].id" value="${skill.id}"
-				<c:if test = "${chosenSkills[status.index] > 0}"> checked</c:if> />
+				<c:if test = "${status.index < selectedSkillsNumber}"> checked</c:if> />
 			<input type="hidden" name="skills[${status.index}].skillName"
 				value="${skill.skillName}" />
 			<label for="skill[${status.index}]">${skill.skillName}</label>

@@ -22,32 +22,32 @@
 			Login:
 			<form:errors path="login" cssClass="error" />
 		</div>
-		<form:input path="login" cssClass="form-field" disabled="disabled"/>
+		<form:input path="login" cssClass="form-field" disabled="true"/>
 
 
 		<div class="form-title">
 			New password:
 			<form:errors path="password" cssClass="error" />
 		</div>
-		<form:password path="password" cssClass="form-field" disabled="disabled"/>
+		<form:password path="password" cssClass="form-field" disabled="true"/>
 
 		<div class="form-title">
 			Age:
 			<form:errors path="age" cssClass="error" />
 		</div>
-		<form:input path="age" cssClass="form-field" disabled="disabled"/>
+		<form:input path="age" cssClass="form-field" disabled="true"/>
 
 		<div class="form-title">
 			Country:
 			<form:errors path="address.country" cssClass="error" />
 		</div>
-		<form:input path="address.country" cssClass="form-field" disabled="disabled"/>
+		<form:input path="address.country" cssClass="form-field" disabled="true"/>
 
 		<div class="form-title">
 			City:
 			<form:errors path="address.city" cssClass="error" />
 		</div>
-		<form:input path="address.city" cssClass="form-field" disabled="disabled"/>
+		<form:input path="address.city" cssClass="form-field" disabled="true"/>
 
 		<div class="form-title">
 			Skills:
