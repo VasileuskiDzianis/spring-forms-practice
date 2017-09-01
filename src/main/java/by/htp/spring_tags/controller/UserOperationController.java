@@ -110,7 +110,6 @@ public class UserOperationController {
 		userService.disableUser(user);
 
 		model.addAttribute("users", userService.findAllByStatus(UserStatus.ACTIVE));
-		model.addAttribute("deletedUser", user.getLogin());
 		
 		return "users";
 	}
