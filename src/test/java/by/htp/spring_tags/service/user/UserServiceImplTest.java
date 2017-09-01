@@ -3,7 +3,6 @@ package by.htp.spring_tags.service.user;
 import static org.junit.Assert.*;
 
 import java.util.Arrays;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,8 +21,9 @@ public class UserServiceImplTest extends UserServiceImpl {
 	private final static String USER_FOR_DISABLING_COUNTRY = "BELARUS";
 	private final static int USER_FOR_DISABLING_AGE = 33;
 	private final static UserStatus USER_FOR_DISABLING_STAT = UserStatus.ACTIVE;
+	
 	private final static String USER_FOR_DISABLING_SKILL_NAME = "JavaScript";
-	private final static int USER_FOR_DISABLING_SKILL_ID = 7;
+	private final static int USER_FOR_DISABLING_SKILL_ID_ONE = 7;
 
 	private UserService userService;
 	private ClassPathXmlApplicationContext context;
@@ -46,11 +46,10 @@ public class UserServiceImplTest extends UserServiceImpl {
 		userForDelAddr.setCountry(USER_FOR_DISABLING_COUNTRY);
 		userForDisabling.setAddress(userForDelAddr);
 		Skill userForDelSkill = new Skill();
-		userForDelSkill.setId(USER_FOR_DISABLING_SKILL_ID);
+		userForDelSkill.setId(USER_FOR_DISABLING_SKILL_ID_ONE);
 		userForDelSkill.setSkillName(USER_FOR_DISABLING_SKILL_NAME);
 
 		userForDisabling.setSkills(Arrays.asList(userForDelSkill));
-
 	}
 
 	@Test
@@ -68,7 +67,7 @@ public class UserServiceImplTest extends UserServiceImpl {
 		assertEquals(UserStatus.DISABLED, userForDisabling.getStatus());
 		assertEquals(UserStatus.DISABLED, storedUser.getStatus());
 	}
-
+	
 	@Test(expected = IllegalArgumentException.class)
 	public void nullLoginTest() {
 		userForDisabling.setLogin(null);

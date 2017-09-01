@@ -103,9 +103,15 @@ public class UserOperationController {
 	}
 
 	@RequestMapping(path = "/deletion", method = RequestMethod.POST)
-	public String deleteUser(@RequestParam("userId") int userId) {
-		userService.disableUser(userService.findUserById(userId));
+	public String deleteUser(@RequestParam("userId") int userId, Model model) {
+		User user = userService.findUserById(userId);
+		model.addAttribute("deletedUser", user.getLogin());
+		
+		userService.disableUser(user);
 
-		return "redirect:/users";
+		model.addAttribute("users", userService.findAllByStatus(UserStatus.ACTIVE));
+		model.addAttribute("deletedUser", user.getLogin());
+		
+		return "users";
 	}
 }

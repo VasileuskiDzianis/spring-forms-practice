@@ -9,7 +9,7 @@
 </head>
 <body>
 	<%@ include file="header.jsp"%>
-	<h2 class="home_content">Old unsatiable our now but considered travelling impression</h2>
+	<h2 class="home_content">This foolish text is just for demonstrating fixed position of header</h2>
 
 	<p class="home_content">Attended no do thoughts me on dissuade scarcely. Own are pretty
 		spring suffer old denote his. By proposal speedily mr striking am. But
