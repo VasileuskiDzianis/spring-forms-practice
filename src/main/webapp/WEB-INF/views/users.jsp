@@ -32,7 +32,7 @@
   <div id="prompt-form-container">
     <form id="prompt-form" action="<c:url value="/users/deletion" />" method="post">
       <div id="prompt-message"></div>
-      <input id="deleting_user" type="hidden" name="userId" />
+      <input id="deleting_user" type="hidden" name="delUserId" />
       <input type="submit" value="Ok">
       <input type="button" name="cancel" value="Cancel">
     </form>

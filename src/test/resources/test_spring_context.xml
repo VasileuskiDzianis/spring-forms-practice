@@ -24,7 +24,7 @@
 	<beans:bean id="sessionFactory"
 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<beans:property name="dataSource" ref="dataSource" />
-		<beans:property name="packagesToScan" value="by.htp.spring_tags"/>
+		<beans:property name="packagesToScan" value="by.htp.task2"/>
 		<beans:property name="hibernateProperties" ref="hibernateProperties"/>
 	</beans:bean>
 	
@@ -48,6 +48,6 @@
 		<beans:property name="basename" value="messages" />
 	</beans:bean>
 
-	<context:component-scan base-package="by.htp.spring_tags" />
+	<context:component-scan base-package="by.htp.task2" />
 
 </beans:beans>

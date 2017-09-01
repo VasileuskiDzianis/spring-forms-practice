@@ -24,7 +24,7 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 
-	<context:component-scan base-package="by.htp.spring_tags" />
+	<context:component-scan base-package="by.htp.task2" />
 
 	<!-- Database connection beans -->
 	<beans:import resource="database.xml" />
